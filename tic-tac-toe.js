@@ -41,8 +41,6 @@ var redo = window.addEventListener('load' , ()=>{
                 $plays[$win_cases[i][2]].innerHTML=="O"){
                     status.innerHTML= "Congratulations! O is the Winner!";
                     status.classList.add("you-won");
-            } else{
-                status.innerHTML= "Draw! Try again!"
             }
         }
     }
