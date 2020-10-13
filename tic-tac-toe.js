@@ -1,14 +1,16 @@
 window.addEventListener('load' , ()=>{
 
     var $pX = 'X', $pO = 'O', $player = 1 ;
+    var $win_cases = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,5,6] ];
 
     var $c = document.getElementById("board").children;
     var x;
     for(x =0; x < $c.length; x++){
         $c[x].className='square';
-        $c[x].addEventListener('click', game);
+        $c[x].addEventListener('click', game, {once:true});
         $c[x].addEventListener('mouseover', cursor);
         $c[x].addEventListener('mouseout', nocursor);
+        $c[x].addEventListener('click', selectWinner);
     }
 
     var $track = [ '' , '' , '' , '' , '', '' , '' , '' , ''];
@@ -27,5 +29,19 @@ window.addEventListener('load' , ()=>{
         e.target.classList.remove("hover");
     }
 
+    var status = document.getElementById("status");
 
+    function selectWinner(e){
+        for(i=0; i < $win_cases.length; i++) {
+            if ($plays[$win_cases[i][0]].innerHTML=="X" && $plays[$win_cases[i][1]].innerHTML=="X" && 
+            $plays[$win_cases[i][2]].innerHTML=="X") {
+              status.innerHTML= "Congratulations! X is the Winner!"
+              status.setAttribute("class","you-won")
+              }else if ($plays[$win_cases[i][0]].innerHTML=="O" && $plays[$win_cases[i][1]].innerHTML=="O" && 
+              $plays[$win_cases[i][2]].innerHTML=="O"){
+                 status.innerHTML= "Congratulations! O is the Winner!"
+                 status.setAttribute("class","you-won")
+              }
+        }
+    }
 })
