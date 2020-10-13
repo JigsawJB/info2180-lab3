@@ -1,4 +1,4 @@
-window.addEventListener('load' , ()=>{
+var redo = window.addEventListener('load' , ()=>{
 
     var $pX = 'X', $pO = 'O', $player = 1 ;
     var $win_cases = [ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
@@ -31,17 +31,24 @@ window.addEventListener('load' , ()=>{
 
     var status = document.getElementById("status");
 
-    function selectWinner(e){
+    function selectWinner(){
         for(i=0; i < $win_cases.length; i++) {
             if ($plays[$win_cases[i][0]].innerHTML=="X" && $plays[$win_cases[i][1]].innerHTML=="X" && 
-            $plays[$win_cases[i][2]].innerHTML=="X") {
-              status.innerHTML= "Congratulations! X is the Winner!";
-              status.classList.add("you-won");
-              }else if ($plays[$win_cases[i][0]].innerHTML=="O" && $plays[$win_cases[i][1]].innerHTML=="O" && 
-              $plays[$win_cases[i][2]].innerHTML=="O"){
-                 status.innerHTML= "Congratulations! O is the Winner!";
-                 status.classList.add("you-won");
-              }
+                $plays[$win_cases[i][2]].innerHTML=="X") {
+                    status.innerHTML= "Congratulations! X is the Winner!";
+                    status.classList.add("you-won");
+            }else if ($plays[$win_cases[i][0]].innerHTML=="O" && $plays[$win_cases[i][1]].innerHTML=="O" && 
+                $plays[$win_cases[i][2]].innerHTML=="O"){
+                    status.innerHTML= "Congratulations! O is the Winner!";
+                    status.classList.add("you-won");
+            }
         }
+    }
+
+    var $reload=document.getElementsByClassName("btn")[0];
+    $reload.addEventListener('click', restart);
+    
+    function restart(){
+        window.location.reload();
     }
 })
